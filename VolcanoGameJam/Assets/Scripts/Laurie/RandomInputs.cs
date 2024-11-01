@@ -76,13 +76,14 @@ public class RandomInputs : MonoBehaviour
 
                //Vector3 pos = new Vector3(_placement.position.x, _placement.position.y, 0);
                 Quaternion rot = Quaternion.Euler(0, 90, 0);
-                //Instantiate la sequence
+            //Instantiate la sequence
+
                 GameObject arrows = Instantiate(_arrowPrefab, _placement.position, rot);
                 Transform Transform = arrows.GetComponent<Transform>();
 
                 //Mettre au milieu de placement
                 float zOffset = i * _gapInBetween - totalWidth / 2f;
-                Transform.position = new Vector3(zOffset, 0, 0);
+                Transform.position = new Vector3(_placement.position.x, _placement.position.y, zOffset);
 
                 //Ajout des prefabs pour supprimer 
                 _instanciatedArrows.Add(arrows);
