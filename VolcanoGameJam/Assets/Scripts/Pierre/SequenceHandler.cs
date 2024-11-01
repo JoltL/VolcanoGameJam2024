@@ -21,10 +21,10 @@ public class SequenceHandler : MonoBehaviour
 
     private bool sequenceCompleted = false;
 
-    [SerializeField] private Sprite[] _arrowSprite; //Ref aux sprites des 4 flèches
-
+    [SerializeField] private Animator _animator;
     void Start()
     {
+        _animator = GetComponentInChildren<Animator>();
         GenerateSequence();
         timeRemaining = timeLimit;
 
@@ -81,10 +81,10 @@ public class SequenceHandler : MonoBehaviour
 
         if (sequenceType == SequenceType.ZQSD)
         {
-            char[] keys = { 'Z', 'Q', 'S', 'D' };
+            KeyCode[] keys = { KeyCode.Z, KeyCode.Q, KeyCode.S, KeyCode.D };
             for (int i = 0; i < length; i++)
             {
-                char keyChar = keys[Random.Range(0, keys.Length)];
+                KeyCode keyChar = keys[Random.Range(0, keys.Length)];
                 sequence.Add(keyChar.ToString());
             }
         }
@@ -118,6 +118,7 @@ public class SequenceHandler : MonoBehaviour
 
                     if (currentIndex >= sequence.Count)
                     {
+                        _animator.SetTrigger("Close");
                         SequenceSucceeded();
                     }
                 }
@@ -202,28 +203,6 @@ public class SequenceHandler : MonoBehaviour
             default:
                 return keyName;
         }
-    }
-    //Assigner un sprite à chaque KeyCode
-    Sprite GetSpriteForKey(KeyCode key)
-    {
-
-        if (key == KeyCode.UpArrow)
-        {
-            return _arrowSprite[0];
-        }
-        else if (key == KeyCode.DownArrow)
-        {
-            return _arrowSprite[1];
-        }
-        else if (key == KeyCode.LeftArrow)
-        {
-            return _arrowSprite[2];
-        }
-        else if (key == KeyCode.RightArrow)
-        {
-            return _arrowSprite[3];
-        }
-        return null;
     }
 
     void SequenceSucceeded()

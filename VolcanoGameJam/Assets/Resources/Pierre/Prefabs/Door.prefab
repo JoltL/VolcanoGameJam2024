@@ -65,6 +65,7 @@ MonoBehaviour:
   sequenceType: 0
   sequenceText: {fileID: 2099125133502061024}
   timeLimit: 5
+  _animator: {fileID: 0}
 --- !u!65 &6918733728997111935
 BoxCollider:
   m_ObjectHideFlags: 0
